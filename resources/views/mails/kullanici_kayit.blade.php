@@ -322,7 +322,7 @@
                                         <h1>{{config('app.name')}} Kullanıcı Kaydı</h1>
                                         <h2>Merhaba , eBuy'a hoşgeldin {{$kullanici->adsoyad}} </h2>
                                         <p>Kaydınız başarılı bir şekilde yapıldı.</p>
-                                        <p>Kaydınızı aktifleştirmek için <a href="{{config('app.url')}}/ebuy/public/kullanici/aktiflestir/{{$kullanici->aktivasyon_anahtari}}">TIKLAYINIZ.</a></p>
+                                        <p>Kaydınızı aktifleştirmek için <a href="{{route('kullanici.aktiflestir', $kullanici->aktivasyon_anahtari)}}">TIKLAYINIZ.</a></p>
 
                                     </td>
                                 </tr>

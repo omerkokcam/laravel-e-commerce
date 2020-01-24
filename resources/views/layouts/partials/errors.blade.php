@@ -1,8 +1,8 @@
 @if(count($errors)>0)
-    <div class="alert alert-danger">
+    <div class="alert alert-info" style="width: 450px ; height: 80px ;margin-left: 150px">
         <ul>
             @foreach($errors->all() as $error)
-                <li>{{$error}}</li>
+                {{$error}}
             @endforeach
         </ul>
 

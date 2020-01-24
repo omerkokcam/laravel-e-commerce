@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'],function(){
 
 
 
+
 });
 
 
@@ -59,12 +60,12 @@ Route::group(['prefix'=>'kullanici'],function (){
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::group(['prefix'=>'yonetici','namespace'=>'Yonetici'],function (){
-    Route::get('/',function(){
-       return "ADMİNNN";
-    });
-    Route::get('/oturumac','KullaniciController@oturumac')->name('yonetim.oturumac');
 
+//-------------------------------------------------------------------------------
+Route::group(['prefix'=>'yonetici', 'middleware' => 'yonetici','namespace'=>'Yonetici'],function () {
+    Route::get('/', 'AnasayfaController@index')->name('yonetici.anasayfa');
+    Route::get('/oturumukapat','KullaniciController@oturumukapat')->name('yonetici.oturumukapat');
 
 });
+
+

@@ -18,7 +18,7 @@ class Kullanici extends Authenticatable
     const DELETED_AT = 'deleted_at';
 
     protected $fillable = [
-        'adsoyad', 'email', 'sifre','aktivasyon_anahtari','aktif_mi'
+        'adsoyad', 'email', 'sifre','aktivasyon_anahtari','aktif_mi','yonetici_mi'
     ];
 
 
@@ -31,7 +31,7 @@ class Kullanici extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
+    //controllerdaki request('sifre') alanını database de de sifre diye kontrol edebilmesi için kullandık.
     public function getAuthPassword()
     {
 
