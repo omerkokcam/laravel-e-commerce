@@ -7,26 +7,34 @@
     <div class="container">
         <div class="bg-content">
             <h2>Ödeme</h2>
+            <form action="{{route('odeme')}}">
             <div class="row">
                 <div class="col-md-5">
                     <h3>Ödeme Bilgileri</h3>
                     <div class="form-group">
-                        <label for="kartno">Kredi Kartı Numarası</label>
-                        <input type="text" class="form-control kredikarti" id="kartno" name="cardnumber" style="font-size:20px;" required>
+                        <label for="kart_numarasi">Kredi Kartı Numarası</label>
+                        <input type="text" class="form-control kredikarti" id="kartno" name="kart_numarasi" style="font-size:20px;" required>
                     </div>
                     <div class="form-group">
-                        <label for="cardexpiredatemonth">Son Kullanma Tarihi</label>
+                        <label for="son_kullanma_tarihi_ay">Son Kullanma Tarihi</label>
                         <div class="row">
                             <div class="col-md-6">
                                 Ay
-                                <select name="cardexpiredatemonth" id="cardexpiredatemonth" class="form-control" required>
-                                    <option>1</option>
+                                <select name="son_kullanma_tarihi_ay" id="son_kullanma_tarihi_ay" class="form-control" required>
+                                    @for($i=1;$i<=12;$i++)
+                                    <option>{{$i}}</option>
+                                        @endfor
                                 </select>
                             </div>
                             <div class="col-md-6">
                                 Yıl
-                                <select name="cardexpiredateyear" class="form-control" required>
-                                    <option>2017</option>
+                                <select name="son_kullanma_tarihi_yil" id="son_kullanma_tarihi_yil" class="form-control" required>
+                                    @for($j=date('Y');$j<=date('Y')+10;$j++)
+                                    <option>{{$j}}</option>
+                                        @endfor
+                                    @if($i<date('M')&&$j<date('Y'))
+                                        Kart bilgilerinizi doğru girin lütfen.
+                                        @endif
                                 </select>
                             </div>
                         </div>
@@ -68,6 +76,7 @@
                     <p>Ücretsiz
                 </div>
             </div>
+            </form>
 
         </div>
     </div>

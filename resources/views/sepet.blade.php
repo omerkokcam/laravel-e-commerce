@@ -56,23 +56,32 @@
                     <th class="text-right">{{Cart::total()}} ₺</th>
                 </tr>
             </table>
-
-            @else
-                <tr>
-                    <th>Sepette Henüz bir ürün bulunmamaktadır.</th>
-                </tr>
-            @endif
-
-
-            <div>
-
+                <a href="{{route('odeme')}}" class="btn btn-success pull-right btn-lg">Ödeme Yap</a>
                 <form action="{{route('sepet.bosalt')}}" method="post">
                     {{csrf_field()}}
                     {{method_field('DELETE')}}
                     <input type="submit" class="btn btn-info pull-left" value="Sepeti boşalt">
 
                 </form>
-                <a href="{{route('odeme')}}" class="btn btn-success pull-right btn-lg">Ödeme Yap</a>
+
+            @else
+                <tr>
+                    <th>Sepette Henüz bir ürün bulunmamaktadır.</th>
+                    <hr>
+
+                    <th><a href="{{route('anasayfa')}}">Anasayfaya git.<-</a></th>
+                    <br>
+                    <br>
+                </tr>
+            @endif
+
+
+            <div>
+
+
+
+
+
             </div>
         </div>
     </div>

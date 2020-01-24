@@ -60,3 +60,11 @@ Route::group(['prefix'=>'kullanici'],function (){
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['prefix'=>'yonetici','namespace'=>'Yonetici'],function (){
+    Route::get('/',function(){
+       return "ADMİNNN";
+    });
+    Route::get('/oturumac','KullaniciController@oturumac')->name('yonetim.oturumac');
+
+
+});

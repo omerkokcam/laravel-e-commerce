@@ -14,7 +14,17 @@
                     <div class="panel-body">
 
                         @include('layouts.partials.errors')
-                        <form class="form-horizontal" role="form" method="POST" action="{{route('kullanici.oturumac')}}">
+                        @if(session()->has('mesaj'))
+                            <div class='container' style="margin-bottom: 80px;width:720px ;height:10px;">
+
+                                <div class="alert alert-{{session('mesaj_tur')}}">{{session('mesaj')}}</div>
+
+                            </div>
+
+
+
+                        @endif
+                        <form style=" margin-bottom: 200px" class="form-horizontal" role="form" method="POST" action="{{route('kullanici.oturumac')}}">
                             {{csrf_field()}}
                             <div class="form-group">
                                 <label for="email" class="col-md-4 control-label">Email</label>
