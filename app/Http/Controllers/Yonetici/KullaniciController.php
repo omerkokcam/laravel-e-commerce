@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Yonetici;
 
+use App\Kullanici;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class KullaniciController extends Controller
 {
@@ -35,12 +37,28 @@ class KullaniciController extends Controller
 //
 //        return view('yonetici.oturumac');
 //    }
-//    public function oturumukapat(){
-//        auth()->logout();
-//        request()->session()->flush();
-//        request()->session()->regenerate();
-//
-//        return redirect()->route('anasayfa');
-//    }
+    public function oturumukapat(){
+        auth()->logout();
+        request()->session()->flush();
+        request()->session()->regenerate();
+
+        return redirect()->route('anasayfa');
+    }
+    public function index(){
+        $liste=Kullanici::orderBy('created_at','desc')->paginate(8);
+        return \view('yonetici.kullanici.index',compact('liste'));
+    }
+    public function form($id = 0){
+
+       $entry = new Kullanici();
+        if($id>0){
+            $entry=Kullanici::find($id);
+
+        }
+        return view('yonetici.kullanici.form',compact('entry'));
+
+
+
+    }
 
 }

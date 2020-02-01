@@ -32,6 +32,7 @@ class Kullanici extends Authenticatable
     ];
 
     //controllerdaki request('sifre') alanını database de de sifre diye kontrol edebilmesi için kullandık.
+    //override ettik password yerine sifre kullanılacak diyoruz
     public function getAuthPassword()
     {
 

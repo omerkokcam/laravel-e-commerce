@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <h1 class="page- " style="padding-top:40px ">Dashboard</h1>
+    <h1 class="page">Dashboard</h1>
     <hr>
     <section class="row text-center placeholders">
         <div class="col-6 col-sm-3">

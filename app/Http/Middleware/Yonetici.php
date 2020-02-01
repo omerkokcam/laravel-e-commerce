@@ -16,6 +16,7 @@ class Yonetici
      */
     public function handle($request, Closure $next)
     {
+        //yonetici olup olmadıgını kontrol ettirelim
         if(auth()->user()->yonetici_mi == 1){
             return $next($request);
         }

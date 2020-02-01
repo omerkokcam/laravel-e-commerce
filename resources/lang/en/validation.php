@@ -150,6 +150,7 @@ return [
         'email' => 'Email',
         'sifre' => 'Şifre'
 
+
     ],
 
 ];

@@ -12,14 +12,15 @@
 </head>
 
 <body>
+
 @include('yonetici.layouts.partials.navbar')
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 col-md-3 col-lg-2 sidebar collapse" id="sidebar">
+<div class="container-fluid" style="padding-top:60px">
+    <div class="row" >
+        <div class="col-sm-3 col-md-3 col-lg-2" style="margin-top: 40px;  " >
             @include('yonetici.layouts.partials.sidebar')
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 col-lg-10 col-lg-offset-2 main">
+        <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 col-lg-10 col-lg-offset-2 main" style="position: absolute ">
 
             @yield('content')
 

@@ -66,6 +66,13 @@ Route::group(['prefix'=>'yonetici', 'middleware' => 'yonetici','namespace'=>'Yon
     Route::get('/', 'AnasayfaController@index')->name('yonetici.anasayfa');
     Route::get('/oturumukapat','KullaniciController@oturumukapat')->name('yonetici.oturumukapat');
 
+    Route::group(['prefix'=>'kullanici'],function (){
+        Route::match(['get','post'],'/','KullaniciController@index')->name('yonetici.kullanici');
+        Route::get('/duzenle/{id}','KullaniciController@form')->name('yonetici.kullanici.form');
+
+    });
+
+
 });
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Yonetici;
 
+use App\Kullanici;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

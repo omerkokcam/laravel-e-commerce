@@ -29,6 +29,11 @@ class KullaniciController extends Controller
             'email' => 'required|email',
             'sifre' => 'required'
         ]);
+        $credentials=[
+            'email'=>request('email'),
+            'password'=>request('sifre'),
+            'aktif_mi'=>1
+        ];
 
         if(auth()->attempt(['email' => request('email'),'password' => request('sifre')],request()->has('benihatirla')) ){
 
