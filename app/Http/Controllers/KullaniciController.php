@@ -35,14 +35,15 @@ class KullaniciController extends Controller
             'aktif_mi'=>1
         ];
 
-        if(auth()->attempt(['email' => request('email'),'password' => request('sifre')],request()->has('benihatirla')) ){
+
+        if(auth()->attempt($credentials,request()->has('benihatirla')) ){
 
             request()->session()->regenerate();
             return redirect()->intended('/');
         }
         else{
 
-            $errors = ['email' => 'Hatalı Giriş'];
+            $errors = ['email' => 'Hatalı Giriş.','sent'=>'Emailden hesap aktifliğini onaylamayı unutmayın!'];
             return back()->withErrors($errors);
         }
     }
