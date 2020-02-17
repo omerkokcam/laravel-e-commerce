@@ -66,23 +66,35 @@ Route::group(['prefix'=>'yonetici', 'middleware' => 'yonetici','namespace'=>'Yon
     Route::get('/', 'AnasayfaController@index')->name('yonetici.anasayfa');
     Route::get('/oturumukapat','KullaniciController@oturumukapat')->name('yonetici.oturumukapat');
 
+
     Route::group(['prefix'=>'kullanici'],function (){
         Route::match(['get','post'],'/','KullaniciController@index')->name('yonetici.kullanici');
         Route::get('/duzenle/{id}','KullaniciController@form')->name('yonetici.kullanici.duzenle');
         Route::post('/kayit/{id?}','KullaniciController@kayit')->name('yonetici.kullanici.kayit');
         Route::get('/sil/{id}','KullaniciController@sil')->name('yonetici.kullanici.sil');
         Route::get('/yeni','KullaniciController@form')->name('yonetici.kullanici.yeni');
+    });
 
 
-    });Route::group(['prefix'=>'kategori'],function (){
+    Route::group(['prefix'=>'kategori'],function (){
         Route::match(['get','post'],'/','KategoriController@index')->name('yonetici.kategori');
         Route::get('/duzenle/{id}','KategoriController@form')->name('yonetici.kategori.duzenle');
         Route::post('/kayit/{id?}','KategoriController@kayit')->name('yonetici.kategori.kayit');
         Route::get('/sil/{id}','KategoriController@sil')->name('yonetici.kategori.sil');
         Route::get('/yeni','KategoriController@form')->name('yonetici.kategori.yeni');
-
-
     });
+
+
+    Route::group(['prefix'=>'urun'],function (){
+        Route::match(['get','post'],'/','UrunController@index')->name('yonetici.urun');
+        Route::get('/duzenle/{id}','UrunController@form')->name('yonetici.urun.duzenle');
+        Route::post('/kayit/{id?}','UrunController@kayit')->name('yonetici.urun.kayit');
+        Route::get('/sil/{id}','UrunController@sil')->name('yonetici.urun.sil');
+        Route::get('/yeni','UrunController@form')->name('yonetici.urun.yeni');
+    });
+
+
+
 
 
 });

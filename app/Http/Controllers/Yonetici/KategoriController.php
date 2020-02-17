@@ -2,26 +2,21 @@
 
 namespace App\Http\Controllers\Yonetici;
 
+use App\Kullanici;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class KategoriController extends Controller
 {
     public function index(){
-        if (request()->filled('aranan')){
-            \request()->flash();
-            $aranan  = \request('aranan');
-            $list = Kategori::where('kategori_adi','like','%aranan%')
-                    ->orderByDesc('created_at')
-                    ->paginate(8)
-                    ->appends('aranan',$aranan);
-        }
-        else{
 
-            $list = Kategori::orderByDesc('created_at')->paginate(8);
-        }
-        return view('yonetici.kategori.index',compact('list'));
+
+            $liste = Kategori::orderByDesc('created_at')->get();
+
+        return view('yonetici.kategori.index',compact('liste'));
     }
     public function form($id = 0){
 
@@ -30,17 +25,65 @@ class KategoriController extends Controller
             $entry=Kategori::find($id);
 
         }
-        return view('yonetici.kategori.form',compact('entry'));
+        $kategoriler = Kategori::all();
+
+        return view('yonetici.kategori.form',compact('entry','kategoriler'));
 
 
     }
 
-    public function kaydet($id = 0)
+    public function kayit($id = 0)
     {
+        $entry = Kategori::find($id);
+
+        if(!request()->filled('slug')){
+               $entry -> slug = Str::slug(request('kategori_adi'));
+                $this->validate(request(),[
+                    'ust_id' => 'required',
+                    'kategori_adi' => 'required',
+                    'slug' => 'required'
+
+                ]);
+            }
+
+
+            if($id > 0 ){
+                //guncelle
+
+                $entry->update([
+
+                    'kategori_adi'=> request('kategori_adi'),
+                    'slug'=> request('slug'),
+                ]);
+
+
+            }
+            else{
+                //yeni kayıt
+
+                $entry = Kategori::create([
+
+
+                    'kategori_adi'=> request('kategori_adi'),
+
+                    'slug'=> request('slug'),
+
+                ]);
+            }
+
+            return redirect()->route('yonetici.kategori.duzenle', $entry -> id)
+                ->with('mesaj',($id > 0 ? 'Kaydedildi':'Güncellendi'))
+                ->with('mesaj_tur','success');
+
+
 
     }
 
-    public function sil(){
+    public function sil($id){
+        $kategori = Kategori::find($id);
+        $kategori -> urunler()->delete();
+        $kategori -> delete();
 
+        return redirect()->route('yonetici.kategori')->with('mesaj','Kayıt Silindi')->with('mesaj_tur','success');
     }
 }

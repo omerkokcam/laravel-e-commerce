@@ -1,5 +1,5 @@
 @extends('yonetici.layouts.master')
-@section('title','ebuy | Yönetici Ana Sayfa')
+@section('title','ebuy | Yönetici Kullanıcı Sayfası')
 
 @section('content')
 

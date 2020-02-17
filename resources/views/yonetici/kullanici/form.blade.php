@@ -5,7 +5,7 @@
 
     <u><h1 class="page">Kullanıcı Yönetimi</h1></u>
 
-    <form method = 'post' action="{{route('yonetici.kullanici.kayit')}}">
+    <form method = 'post' action="{{$entry -> id > 0 ?route('yonetici.kullanici.kayit', $entry -> id ): route('yonetici.kullanici.kayit')}}">
         {{csrf_field()}}
        <div class="pull-right">
         <button type="submit" class="btn btn-primary">
@@ -16,46 +16,27 @@
         @include('layouts.partials.alert')
 
         <div class="row">
+{{--            <input type="hidden" name="id" value="{{$entry->id}}">--}}
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="email">Adınız ve Soyadınız </label>
-                    <input type="text" class="form-control" id="adsoyad" placeholder="Ad ve Soyad" value="{{$entry->adsoyad}}">
+                    <input type="text" class="form-control" name="adsoyad" id="adsoyad" placeholder="Ad ve Soyad" value="{{$entry->adsoyad}}">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="email">Email adresi</label>
-                    <input type="email" class="form-control" id="email" placeholder="Email" value="{{$entry->email}}">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="{{$entry->email}}">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="sifre">Şifre</label>
-                    <input type="password" class="form-control" id="sifre" placeholder="Şifreniz..." >
+                    <input type="password" class="form-control" name="sifre" id="sifre" placeholder="Şifreniz..." >
                 </div>
             </div>
         </div>
-{{--        <div class="row">--}}
-{{--            <div class="col-md-12">--}}
-{{--                <div class="form-group">--}}
-{{--                    <label for="adres">Adres</label>--}}
-{{--                    <input type="text" class="form-control" id="adres" placeholder="Adres" value="{{$entry->detay->adres}}">--}}
-{{--                </div>--}}
-{{--            </div>--}}
 
-{{--            <div class="col-md-12">--}}
-{{--                <div class="form-group">--}}
-{{--                    <label for="telefon">Telefon Numarası</label>--}}
-{{--                    <input type="text" class="form-control" id="telefon" placeholder="Telefon" value="{{$entry->detay->telefon}}">--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div><div class="col-md-12">--}}
-{{--                <div class="form-group">--}}
-{{--                    <label for="ceptelefon">Cep Telefon Numarası</label>--}}
-{{--                    <input type="text" class="form-control" id="ceptelefon" placeholder="Cep Telefonu" value="{{$entry->detay->ceptelefonu}}">--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
 
         <div class="checkbox">
             <label>

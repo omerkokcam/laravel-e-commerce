@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class KullaniciController extends Controller
@@ -48,13 +49,13 @@ class KullaniciController extends Controller
     }
     public function index(){
         $liste=Kullanici::orderBy('created_at','desc')->paginate(8);
-        return \view('yonetici.kullanici.index',compact('liste'));
+        return view('yonetici.kullanici.index',compact('liste'));
     }
     public function form($id = 0){
 
        $entry = new Kullanici();
         if($id>0){
-            $entry=Kullanici::find($id);
+            $entry = Kullanici::find($id);
 
         }
         return view('yonetici.kullanici.form',compact('entry'));
@@ -63,7 +64,7 @@ class KullaniciController extends Controller
 
     }
 
-    public function kayit($id = 0){
+    public function kayit(Request $request, $id = 0){
         $this->validate(\request(),[
             'adsoyad' => 'required',
             'email' => 'required|email'
@@ -75,35 +76,37 @@ class KullaniciController extends Controller
         }
 
 
-        if($id >0 ){
+        if($id > 0 ){
             //guncelle
 
-            $entry = Kullanici::find('id',$id)->firstOrFail();
-            $entry->update($data);
+            $entry = Kullanici::find($id);
+            $entry->update([
+                'adsoyad'=> request('adsoyad'),
+                'email'=> request('email'),
+                'sifre'=> Hash::make( request('sifre')),
+
+                'aktif_mi'=> request()->has('aktif_mi')?1:0,
+                'yonetici_mi' =>request()->has('yonetici_mi')?1:0
+
+                ]);
+
 
         }
         else{
             //yeni kayıt
+
             $entry = Kullanici::create([
 
                 'adsoyad'=> request('adsoyad'),
                 'email'=> request('email'),
                 'sifre'=> Hash::make( request('sifre')),
-                'aktivasyon_anahtari'=> Str::random(60),
                 'aktif_mi'=> request()->has('aktif_mi')?1:0,
                 'yonetici_mi' =>request()->has('yonetici_mi')?1:0
 
             ]);
         }
-        KullaniciDetay::updateOrCreate(
-            ['kullanici_id'=>$entry->id],
-            ['adres'=>\request('adres'),
-                'telefon'=>\request('telefon'),
-                'ceptelefonu'=>\request('ceptelefonu')
-                ]
-        );
 
-        return redirect()->route('yonetici.kullanici.duzenle',$entry->id);
+        return redirect()->route('yonetici.kullanici');
     }
 
 
