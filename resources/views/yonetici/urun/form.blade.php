@@ -41,6 +41,38 @@
                     <input type="text" class="form-control" name="fiyati" id="fiyati" placeholder="Örn: 50, 70, 1020"  value="{{$entry->fiyati}}">
                 </div>
             </div>
+
+
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="hidden" name="goster_slider" value="0">
+                <input type="checkbox" name="goster_slider" value = "1" {{$entry->detay->goster_slider == 1 ? 'checked' : '' }}> Slider'da Göster
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="hidden" name="goster_gunun_firsati" value="0">
+                <input type="checkbox" name="goster_gunun_firsati" value = "1" {{$entry->detay->goster_gunun_firsati == 1 ? 'checked' : '' }}> Günün Fırsatında Göster
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="hidden" name="goster_one_cikan" value="0">
+                <input type="checkbox" name="goster_one_cikan" value = "1" {{$entry->detay->goster_one_cikan == 1 ? 'checked' : '' }}> Öne Çıkanlarda göster
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="hidden" name="goster_cok_satan" value="0">
+                <input type="checkbox" name="goster_cok_satan" value = "1" {{$entry->detay->goster_cok_satan == 1 ? 'checked' : '' }}> Çok Satanlarda göster
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="hidden" name="goster_indirimli" value="0">
+                <input type="checkbox" name="goster_indirimli" value = "1" {{$entry->detay->goster_indirimli == 1 ? 'checked' : '' }}> İndirimli Ürünlerde göster
+            </label>
         </div>
 
 

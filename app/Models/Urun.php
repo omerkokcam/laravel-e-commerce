@@ -21,7 +21,7 @@ class Urun extends Model
     }
     public function detay(){
         //urun modelinin içerisinde urune ait olan detay bilgisini cekme
-        return $this->hasOne('App\Models\UrunDetay');
+        return $this->hasOne('App\Models\UrunDetay')->withDefault();
     }
 
 

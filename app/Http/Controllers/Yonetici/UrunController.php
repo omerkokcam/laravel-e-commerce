@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Yonetici;
 
 use App\Models\Urun;
+use App\Models\UrunDetay;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -35,7 +36,7 @@ class UrunController extends Controller
             'aciklama'=>'required',
 
         ]);
-
+        $data_detay = \request()->only('goster_slider','goster_one_cikan','goster_gunun_firsati','goster_cok_satan','goster_indirimli');
         if($id > 0 ){
             //guncelleme yap
             $entry = Urun::find($id);
@@ -47,26 +48,35 @@ class UrunController extends Controller
 
                 ]);
 
-
+            $entry -> detay -> update($data_detay);
+            $entry->detay->save();
         }
         else{
             //yeni kayıt yap
-            Urun::create([
+
+           $entry = Urun::create([
                 'urun_adi'=>request('urun_adi'),
                 'slug'=>request('slug'),
                 'fiyati'=>request('fiyati'),
                 'aciklama'=>request('aciklama')
 
             ]);
+            $entry->detay->create($data_detay);
+
+            $entry->detay->save();
         }
-    return redirect()->route('yonetici.urun');
+
+    return redirect()->route('yonetici.urun.duzenle',$entry->id)->with('mesaj','Güncellendi')->with('mesaj_tur','success');
     }
 
 
     public function sil($id){
 
-        Urun::find($id)->delete();
+        $urun = Urun::find($id);
+        $urun->kategoriler()->detach();
+        $urun->detay()->delete();
+        $urun->delete();
 
-        return redirect()->route('yonetici.urun');
+        return redirect()->route('yonetici.urun')->with('mesaj','Kayıt silindi')->with('mesaj_tur','success');
     }
 }
