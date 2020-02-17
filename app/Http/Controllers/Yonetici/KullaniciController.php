@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Yonetici;
 
 use App\Kullanici;
+use App\Models\KullaniciDetay;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class KullaniciController extends Controller
@@ -58,6 +60,56 @@ class KullaniciController extends Controller
         return view('yonetici.kullanici.form',compact('entry'));
 
 
+
+    }
+
+    public function kayit($id = 0){
+        $this->validate(\request(),[
+            'adsoyad' => 'required',
+            'email' => 'required|email'
+        ]);
+        $data = \request()->only('adsoyad','email');
+        if(\request()->filled('sifre')){
+            $data['sifre'] = Hash::make(\request('sifre'));
+
+        }
+
+
+        if($id >0 ){
+            //guncelle
+
+            $entry = Kullanici::find('id',$id)->firstOrFail();
+            $entry->update($data);
+
+        }
+        else{
+            //yeni kayıt
+            $entry = Kullanici::create([
+
+                'adsoyad'=> request('adsoyad'),
+                'email'=> request('email'),
+                'sifre'=> Hash::make( request('sifre')),
+                'aktivasyon_anahtari'=> Str::random(60),
+                'aktif_mi'=> request()->has('aktif_mi')?1:0,
+                'yonetici_mi' =>request()->has('yonetici_mi')?1:0
+
+            ]);
+        }
+        KullaniciDetay::updateOrCreate(
+            ['kullanici_id'=>$entry->id],
+            ['adres'=>\request('adres'),
+                'telefon'=>\request('telefon'),
+                'ceptelefonu'=>\request('ceptelefonu')
+                ]
+        );
+
+        return redirect()->route('yonetici.kullanici.duzenle',$entry->id);
+    }
+
+
+    public function sil($id){
+        Kullanici::find($id)->forceDelete();
+        return redirect()->route('anasayfa')->with('mesaj','Kayıt Silindi')->with('mesaj_tur','success');
 
     }
 

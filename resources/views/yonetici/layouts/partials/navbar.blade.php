@@ -32,7 +32,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#">Action</a>
+                            <a>{{Auth::user()->adsoyad}}</a>
                         </li>
                         <li role="separator" class="divider"></li>
                         <li>

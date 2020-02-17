@@ -6,12 +6,12 @@
     <u><h1 class="page">Kullanıcı Yönetimi</h1></u>
     <hr>
     <h1 class="sub-header">
-        <div class="btn-group pull-right" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-primary">Print</button>
-            <button type="button" class="btn btn-primary">Export</button>
+        <div class="btn-group pull-right" >
+            <a href="{{route('yonetici.kullanici.yeni')}}" class="btn btn-primary">Yeni</a>
         </div>
         Kullanıcı Listesi
     </h1>
+    @include('layouts.partials.alert')
     <div class="table-responsive">
         <table class="table table-hover table-bordered">
             <thead class="thead-dark">
@@ -56,7 +56,7 @@
                     <a href="{{route('yonetici.kullanici.duzenle',$list->id)}}" class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="Düzenle">
                         <span class="fa fa-pencil"></span>
                     </a>
-                    <a href="#" class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Sil" onclick="return confirm('Bu kullanıcı kaydını silmek istediğinize emin misiniz?')">
+                    <a href="{{route('yonetici.kullanici.sil',$list->id)}}" class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Sil" onclick="return confirm('Bu kullanıcı kaydını silmek istediğinize emin misiniz?')">
                         <span class="fa fa-trash"></span>
                     </a>
                 </td>

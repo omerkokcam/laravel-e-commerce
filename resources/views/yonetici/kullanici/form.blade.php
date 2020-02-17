@@ -4,40 +4,69 @@
 @section('content')
 
     <u><h1 class="page">Kullanıcı Yönetimi</h1></u>
-    <h1 class="sub-header">Kullanıcı Kayıt Formu</h1>
-    <form>
+
+    <form method = 'post' action="{{route('yonetici.kullanici.kayit')}}">
+        {{csrf_field()}}
+       <div class="pull-right">
+        <button type="submit" class="btn btn-primary">
+            {{$entry -> id > 0 ? "Güncelle " : "Kaydet" }}</button>
+       </div>
+        <h2 class="sub-header">Kullanıcı {{$entry -> id > 0 ? "Düzenle " : "Ekle"}}</h2>
+        @include('layouts.partials.errors')
+        @include('layouts.partials.alert')
+
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email adresi</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    <label for="email">Adınız ve Soyadınız </label>
+                    <input type="text" class="form-control" id="adsoyad" placeholder="Ad ve Soyad" value="{{$entry->adsoyad}}">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Şifre</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <label for="email">Email adresi</label>
+                    <input type="email" class="form-control" id="email" placeholder="Email" value="{{$entry->email}}">
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
-                    <label for="address">Address</label>
-                    <input type="text" class="form-control" id="address" placeholder="Address">
+                    <label for="sifre">Şifre</label>
+                    <input type="password" class="form-control" id="sifre" placeholder="Şifreniz..." >
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <label for="exampleInputFile">File input</label>
-            <input type="file" id="exampleInputFile">
-            <p class="help-block">Example block-level help text here.</p>
+{{--        <div class="row">--}}
+{{--            <div class="col-md-12">--}}
+{{--                <div class="form-group">--}}
+{{--                    <label for="adres">Adres</label>--}}
+{{--                    <input type="text" class="form-control" id="adres" placeholder="Adres" value="{{$entry->detay->adres}}">--}}
+{{--                </div>--}}
+{{--            </div>--}}
+
+{{--            <div class="col-md-12">--}}
+{{--                <div class="form-group">--}}
+{{--                    <label for="telefon">Telefon Numarası</label>--}}
+{{--                    <input type="text" class="form-control" id="telefon" placeholder="Telefon" value="{{$entry->detay->telefon}}">--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div><div class="col-md-12">--}}
+{{--                <div class="form-group">--}}
+{{--                    <label for="ceptelefon">Cep Telefon Numarası</label>--}}
+{{--                    <input type="text" class="form-control" id="ceptelefon" placeholder="Cep Telefonu" value="{{$entry->detay->ceptelefonu}}">--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="aktif_mi" value = "1" {{$entry->yonetici_mi == 1 ? 'checked' : '' }}> Beni Hatırla
+            </label>
         </div>
         <div class="checkbox">
             <label>
-                <input type="checkbox"> Check me out
+                <input type="checkbox" name="yonetici_mi" value = "1" {{$entry->yonetici_mi == 1 ? 'checked' : '' }}> Yönetici mi?
             </label>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+
     </form>
 @endsection
