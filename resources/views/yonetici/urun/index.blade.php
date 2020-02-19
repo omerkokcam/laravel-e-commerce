@@ -17,6 +17,7 @@
             <thead class="thead-dark">
             <tr>
                 <th>Ürün Id</th>
+                <th>Ürün Resmi</th>
                 <th>Ürün Adı</th>
                 <th>Ürün Slug Adı</th>
                 <th>Ürün Fiyatı</th>
@@ -31,6 +32,7 @@
             @foreach($liste as $list)
             <tr>
                 <td>{{$list->id}}</td>
+                <td><img style="height:100px;width:80px" src="{{asset('/uploads/urunler/'.$list->detay->urun_resmi)}}" ></td>
                 <td>{{$list->urun_adi}}</td>
                 <td>{{$list->slug}}</td>
                 <td>{{$list->fiyati}}</td>

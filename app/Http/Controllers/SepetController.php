@@ -16,6 +16,7 @@ class SepetController extends Controller
 
     public function index()
     {
+        $urun = Urun::find(\request('id'));
         if(auth()->check()){
             $kontrol = SepetUrun::count();
             if($kontrol == 0){
@@ -24,7 +25,7 @@ class SepetController extends Controller
 
         }
 
-        return view('sepet');
+        return view('sepet',compact('urun'));
     }
     public function ekle()
     {
@@ -34,8 +35,6 @@ class SepetController extends Controller
 
         if (auth()->check()) {   //eger zaten kullanici bulunuyorsa
             $aktif_sepet_id = session('aktif_sepet_id');
-
-
             //sepet kaydı oluşturalım
             if (!isset($aktif_sepet_id)) {
                 $aktif_sepet = Sepet::create([
@@ -45,21 +44,15 @@ class SepetController extends Controller
                 //veri tabanında oluşan kaydın id degerini alıyoruz
                 $aktif_sepet_id = $aktif_sepet->id;
                 session()->put('aktif_sepet_id', $aktif_sepet_id);
-
             }
-
             $urun_kontrol = SepetUrun::where('sepet_id', $aktif_sepet_id)->where('urun_id', $urun->id)->first();
             if (count($urun_kontrol) > 0)
             {
                 $urun_kontrol->delete();
             }
-
             SepetUrun::create(
                 ['sepet_id'=>$aktif_sepet_id,'urun_id'=>$urun->id, 'adet'=>$cartItem->qty,'tutar'=>$urun->fiyati*$cartItem->qty,'durum'=>'Beklemede']
                 );
-
-
-
         }
 
             return redirect()->route('sepet');

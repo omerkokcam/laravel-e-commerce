@@ -39,22 +39,24 @@
                         @if(count($urunler) == 0)
                             <div class="col-md-12">Bu kategoride henüz ürün bulunmamaktadır.</div>
                         @endif
-                        <div class="col-md-3 product">
 
                               @foreach($urunler as $urun)
-                                  @php
-                                  $rastgele=rand(1,7)
-                                  @endphp
                                   @for($i=1;$i<=count($urun);$i++)
-                                <a href="{{route('urun',$urun->slug)}}"><img src="{{asset('img/images/'.$rastgele.'.jpg')}}"></a>
+                                    <div class="col-md-3 product">
+
+                                    <a href="{{route('urun',$urun->slug)}}"><img src="{{asset('/uploads/urunler/'.$urun->detay->urun_resmi)}}"></a>
                                 @endfor
-                                <p><a href="{{route('urun',$urun->slug)}}">{{$urun->urun_adi}}</a></p>
+                                <p><a title ="{{$urun->urun_adi}}" href="{{route('urun',$urun->slug)}}">{{ strlen(strip_tags($urun->urun_adi)) > 5? substr(strip_tags($urun->urun_adi), 0, 10) ."..." : "" }} </a></p>
+
+
                                 <p class="price">{{$urun->fiyati}}₺</p>
                                 <p><a href="{{route('sepet')}}" class="btn btn-theme">Sepete Ekle</a></p>
-                            @endforeach
-                                {{request() -> has('order') ? $urunler->appends(['order' => request('order')]) -> links() : $urunler -> links()}}
-                        </div>
+                                    </div>
+
+                                    @endforeach
                     </div>
+                        {{request() -> has('order') ? $urunler->appends(['order' => request('order')]) -> links() : $urunler -> links()}}
+
                 </div>
             </div>
         </div>

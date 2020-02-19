@@ -9,6 +9,7 @@ class KullaniciDetay extends Model
     protected $table = 'kullanici_detay';
     protected $timestamps = false;
     protected $guarded = [];
+    protected $fillable = ['kullanici_id','adsoyad','adres','telefon','ceptelefonu'];
 
     public function kullanici(){
 

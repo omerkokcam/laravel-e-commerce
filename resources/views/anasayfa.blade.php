@@ -34,13 +34,12 @@
                     <div class="carousel-inner" role="listbox">
                         @foreach($urunler_slider as $index=>$urun_detay)
                         <div class="item {{$index==0 ? 'active':''}}">
-                            @php
-                                $rastgele=rand(1,7)
-                            @endphp
-                            <img src="{{asset('img/images/'.$rastgele.'.jpg')}}" alt="...">
+                            <a href="{{route('urun',$urun_detay->urun->slug)}}">
+                            <img src="{{asset('/uploads/urunler/'.$urun_detay->urun_resmi)}}" >
                             <div class="carousel-caption">
                                 {{$urun_detay->urun->urun_adi}}
                             </div>
+                            </a>
                         </div>
                         @endforeach
                     </div>
@@ -59,10 +58,7 @@
                     <div class="panel-heading">Günün Fırsatı</div>
                     <div class="panel-body">
                         <a href="{{route('urun',$urun_gunun_firsati->slug)}}">
-                            @php
-                                $rastgele=rand(1,7)
-                            @endphp
-                            <img src="{{asset('img/images/'.$rastgele.'.jpg')}}" class="img-responsive">
+                            <img src="{{asset('/uploads/urunler/'.$urun_gunun_firsati->detay->urun_resmi)}}" class="img-responsive">
                             {{$urun_gunun_firsati->urun_adi}}
                         </a>
                     </div>
@@ -75,12 +71,10 @@
                 <div class="panel-heading">Öne Çıkan Ürünler</div>
                 <div class="panel-body">
                     <div class="row">
-                        @foreach($urunler_cok_satan as $urun_detay)
+                        @foreach($urunler_one_cikan as $urun_detay)
                         <div class="col-md-3 product">
-                            @php
-                                $rastgele=rand(1,7)
-                            @endphp
-                            <a href="{{route('urun',$urun_detay->urun->slug)}}"><img src="{{asset('img/images/'.$rastgele.'.jpg')}}"></a>
+
+                            <a href="{{route('urun',$urun_detay->urun->slug)}}"><img src="{{asset('/uploads/urunler/'.$urun_detay->urun_resmi)}}"></a>
                             <p><a href="{{route('urun',$urun_detay->urun->slug)}}">{{$urun_detay->urun->urun_adi}}</a></p>
                             <p class="price">{{$urun_detay->urun->fiyati}} ₺</p>
                         </div>
@@ -99,10 +93,8 @@
                     <div class="row">
                         @foreach($urunler_cok_satan as $urun_detay)
                         <div class="col-md-3 product">
-                            @php
-                                $rastgele=rand(1,7)
-                            @endphp
-                            <a href="{{route('urun',$urun_detay->urun->slug)}}"><img src="{{asset('img/images/'.$rastgele.'.jpg')}}"></a>
+
+                            <a href="{{route('urun',$urun_detay->urun->slug)}}"><img src="{{asset('/uploads/urunler/'.$urun_detay->urun_resmi)}}"></a>
                             <p><a href="{{route('urun',$urun_detay->urun->slug)}}">{{$urun_detay->urun->urun_adi}}</a></p>
                             <p class="price">{{$urun_detay->urun->fiyati}} ₺</p>
                         </div>
@@ -118,10 +110,8 @@
                     <div class="row">
                         @foreach($urunler_indirimli as $urun_detay)
                         <div class="col-md-3 product">
-                            @php
-                                $rastgele=rand(1,7)
-                            @endphp
-                            <a href="{{route('urun',$urun_detay->urun->slug)}}"><img src="{{asset('img/images/'.$rastgele.'.jpg')}}"></a>
+
+                            <a href="{{route('urun',$urun_detay->urun->slug)}}"><img src="{{asset('/uploads/urunler/'.$urun_detay->urun_resmi)}}"></a>
                             <p><a href="{{route('urun',$urun_detay->urun->slug)}}">{{$urun_detay->urun->urun_adi}}</a></p>
                             <p class="price">{{$urun_detay->urun->fiyati}} ₺</p>
                         </div>

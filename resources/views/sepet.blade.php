@@ -17,13 +17,9 @@
                 </tr>
 
                 @foreach(Cart::content() as $urunCartItem)
+
                 <tr>
-                    @php
-                        $rastgele=rand(1,7)
-                    @endphp
-
-
-                    <td style="width:20px; height:20px;"> <img src="{{asset('img/images/'.$rastgele.'.jpg')}}"> {{$urunCartItem->name}}
+                    <td style="width:20px; height:20px;"> <img src="{{asset('uploads/urunler/'.\App\Models\Urun::find($urunCartItem->id)->detay->urun_resmi)}}"> {{$urunCartItem->name}}
                         <form action="{{route('sepet.kaldir',$urunCartItem->rowId)}}" method="post">
                             {{csrf_field()}}
                             {{method_field('DELETE')}}

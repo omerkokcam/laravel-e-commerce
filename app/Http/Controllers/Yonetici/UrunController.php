@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Yonetici;
 
+use App\Models\Kategori;
 use App\Models\Urun;
 use App\Models\UrunDetay;
 use Illuminate\Http\Request;
@@ -17,56 +18,94 @@ class UrunController extends Controller
     }
 
     public function form($id = 0){
-
         $entry = new Urun;
 
         if($id > 0 ){
-
             $entry = Urun::find($id);
+            $urun_kategorileri = $entry->kategoriler()->pluck('kategori_id')->all();
 
         }
-
-        return view('yonetici.urun.form',compact('entry'));
+        $kategoriler = Kategori::all();
+        return view('yonetici.urun.form',compact('entry','kategoriler','urun_kategorileri'));
     }
     public function kayit($id = 0){
+
         $this->validate(\request(),[
            'urun_adi'=>'required',
             'slug'=>'required',
-            'fiyati'=>'required|int',
-            'aciklama'=>'required',
-
+            'fiyati'=>'required|numeric',
+            'aciklama'=>'required'
         ]);
-        $data_detay = \request()->only('goster_slider','goster_one_cikan','goster_gunun_firsati','goster_cok_satan','goster_indirimli');
+        $kategoriler = \request('kategoriler');
+
         if($id > 0 ){
             //guncelleme yap
             $entry = Urun::find($id);
-            $entry -> update([
+            $entry->update([
                 'urun_adi'=>request('urun_adi'),
                 'slug'=>request('slug'),
                 'fiyati'=>request('fiyati'),
                 'aciklama'=>request('aciklama')
 
                 ]);
+            $entry->detay()->update([
+                'goster_slider'=>\request('goster_slider'),
+                'goster_one_cikan'=>\request('goster_one_cikan'),
+                'goster_gunun_firsati'=>\request('goster_gunun_firsati'),
+                'goster_cok_satan'=>\request('goster_cok_satan'),
+                'goster_indirimli'=>\request('goster_indirimli')
+                ]);
 
-            $entry -> detay -> update($data_detay);
-            $entry->detay->save();
+
+            $entry->kategoriler()->sync($kategoriler);
         }
+
         else{
             //yeni kayıt yap
-
            $entry = Urun::create([
                 'urun_adi'=>request('urun_adi'),
                 'slug'=>request('slug'),
                 'fiyati'=>request('fiyati'),
                 'aciklama'=>request('aciklama')
+            ]);
+            $entry->detay()->create([
+                'urun_id' => $entry->id,
+                'goster_slider'=>\request('goster_slider'),
+                'goster_one_cikan'=>\request('goster_one_cikan'),
+                'goster_gunun_firsati'=>\request('goster_gunun_firsati'),
+                'goster_cok_satan'=>\request('goster_cok_satan'),
+                'goster_indirimli'=>\request('goster_indirimli')
+            ]);
+
+            $entry->kategoriler()->attach($kategoriler);
+        }
+
+        if(request()->hasFile('urun_resmi')){
+            $this->validate(\request(),[
+               'urun_resmi'=>'image|mimes:png,jpg,jpeg,gif,jfif,jpe|max:4096'
 
             ]);
-            $entry->detay->create($data_detay);
+            $urun_resmi = \request()->file('urun_resmi');
+//            $urun_resmi->extension();//urun resmininin uzantısını çekmek için extension() kullanılır.
+//            $urun_resmi -> getClientOriginalName();//bilgisayardaki adını çekmeyi sağlar.
+//            $urun_resmi -> hashName();
+            $dosya_adi = $entry->id . '-' .time().'.'.$urun_resmi->extension();
+//            $dosya_adi = $urun_resmi->getClientOriginalName();
+//            $dosya_adi = $urun_resmi->hashName();
+            //urunu yukleme
+            if($urun_resmi-> isValid()){
+                $urun_resmi->move('uploads/urunler',$dosya_adi);
 
-            $entry->detay->save();
+                UrunDetay::updateOrCreate(
+                    ['urun_id'=>$entry->id],
+                   ['urun_resmi'=>$dosya_adi]
+                );
+
+            }
         }
 
     return redirect()->route('yonetici.urun.duzenle',$entry->id)->with('mesaj','Güncellendi')->with('mesaj_tur','success');
+
     }
 
 

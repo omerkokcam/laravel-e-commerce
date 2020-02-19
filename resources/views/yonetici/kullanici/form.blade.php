@@ -19,7 +19,7 @@
 {{--            <input type="hidden" name="id" value="{{$entry->id}}">--}}
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="email">Adınız ve Soyadınız </label>
+                    <label for="adsoyad">Adınız ve Soyadınız </label>
                     <input type="text" class="form-control" name="adsoyad" id="adsoyad" placeholder="Ad ve Soyad" value="{{$entry->adsoyad}}">
                 </div>
             </div>
@@ -50,4 +50,5 @@
         </div>
 
     </form>
+
 @endsection

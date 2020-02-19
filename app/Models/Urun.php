@@ -14,7 +14,7 @@ class Urun extends Model
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
     const DELETED_AT = 'deleted_at';
-
+    protected $fillable = ['urun_adi','slug','aciklama','fiyati'];
     public function kategoriler(){
 
         return $this->belongsToMany('App\Models\Kategori','kategori_urun');

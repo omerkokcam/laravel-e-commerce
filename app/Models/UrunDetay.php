@@ -8,6 +8,7 @@ class UrunDetay extends Model
 {
     protected $table = 'urun_detay';
     protected $guarded = [];
+    protected $fillable=['urun_id','goster_slider','goster_gunun_firsati','goster_one_cikan','goster_cok_satan','goster_indirimli','urun_resmi'];
     public $timestamps=false;
 
 

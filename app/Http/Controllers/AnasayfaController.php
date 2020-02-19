@@ -27,6 +27,7 @@ class AnasayfaController extends Controller
         View::share('urunler_cok_satan',$urunler_cok_satan);
         View::share('urunler_indirimli',$urunler_indirimli);
         View::share('kategoriler',$kategoriler);
+
         return view('anasayfa');
     }
 }

@@ -19,7 +19,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#">Ana Sayfa</a>
+                    <a href="{{route('yonetici.anasayfa')}}">Ana Sayfa</a>
                 </li>
                 <li>
                     <a href="#">Ayarlar</a>

@@ -9,6 +9,8 @@
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
     <link rel="stylesheet" href="{{asset('css/admin.css')}}">
     <link rel="shortcut icon" type="image/png" href="{{asset('img/favicon.png')}}"/>
+
+    @yield('head')
 </head>
 
 <body>
@@ -27,8 +29,11 @@
         </div>
     </div>
 </div>
+
 <script src='https://code.jquery.com/jquery-3.2.1.slim.min.js'></script>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
 <script src="{{asset('js/admin-app.js')}}"></script>
+
+@yield('footer')
 </body>
 </html>

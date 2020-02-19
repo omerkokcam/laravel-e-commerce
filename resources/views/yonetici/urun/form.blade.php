@@ -1,11 +1,11 @@
 @extends('yonetici.layouts.master')
-@section('title','ebuy | Yönetici Ana Sayfa')
+@section('title','ebuy | Yönetici Ürün Sayfası')
 
 @section('content')
 
     <u><h1 class="page">Ürün Yönetimi</h1></u>
 
-    <form method = 'post' action="{{$entry -> id > 0 ?route('yonetici.urun.kayit', $entry -> id ): route('yonetici.urun.kayit')}}">
+    <form method = 'post' action="{{$entry -> id > 0 ?route('yonetici.urun.kayit', $entry -> id ): route('yonetici.urun.kayit')}}" enctype="multipart/form-data">
         {{csrf_field()}}
        <div class="pull-right">
         <button type="submit" class="btn btn-primary">
@@ -74,8 +74,73 @@
                 <input type="checkbox" name="goster_indirimli" value = "1" {{$entry->detay->goster_indirimli == 1 ? 'checked' : '' }}> İndirimli Ürünlerde göster
             </label>
         </div>
+        <div class="col-md-6" style="margin-left:-18px">
+            <div class="form-group">
+                <label for="kategoriler">Kategoriler</label>
+                <select class="form-control" id="kategoriler" name="kategoriler[]" multiple>
+                    @foreach($kategoriler as $kategori)
+                    <option onclick="tiklamaislemi()" value="{{$kategori->id}}" {{$entry->id ?collect(old('kategoriler',$urun_kategorileri))->contains($kategori->id) ? 'selected': '' : '' }} >{{ $kategori->kategori_adi}}</option>
+                    @endforeach
 
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            @if($entry->detay->urun_resmi!=null)
+                <img src="{{asset('/uploads/urunler/'.$entry->detay->urun_resmi)}}" style="margin-top: -20%;margin-left: 51%;max-height:100px;max-width:400px"class="thumbnail pull-left" >
+            @endif
+            <div style="margin-left: 51%;margin-top: -20%">
+            <label for="urun_resmi">Ürün Resmi</label>
+            <input type="file" id="urun_resmi" name="urun_resmi">
 
-
+            </div>
+        </div>
     </form>
+@endsection
+
+@section('head')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+
+@endsection
+@section('footer')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#kategoriler').select2({
+                placeholder : 'Lütfen kategori seçiniz.'
+            });
+            $('#kategoriler').on('select2:select', function (e) {
+                // Do something
+                tiklamaislemi();
+            });
+            function tiklamaislemi(){
+                function b(){
+                    $('.select2-selection__choice').mouseup(function(){
+                        $($(this).find('.select2-selection__choice__remove')[0]).click();
+                        b();
+                    })
+                }
+                $('.select2-selection__choice').mouseup(function(){
+                    $($(this).find('.select2-selection__choice__remove')[0]).click();
+                    b();
+                });
+            }
+            tiklamaislemi();
+        })
+    </script>
+    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+
+    <script>
+
+        var options = {
+            language :'tr',
+            filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+            filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+            filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+            filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+        };
+        CKEDITOR.replace('aciklama',options);
+    </script>>
+
 @endsection

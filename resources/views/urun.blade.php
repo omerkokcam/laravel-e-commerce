@@ -5,19 +5,16 @@
 
     <div class="container">
         <ol class="breadcrumb">
-            <li><a href="#">Anasayfa</a></li>
+            <li><a href="{{route('anasayfa')}}">Anasayfa</a></li>
             @foreach($kategoriler as $kategori)
             <li><a href="{{route('kategori',$kategori->slug)}}">{{$kategori->kategori_adi}}</a></li>
-            <li class="active">{{$urun->urun_adi}}</li>
+
              @endforeach
         </ol>
         <div class="bg-content">
             <div class="row">
                 <div class="col-md-5">
-                    @php
-                        $rastgele=rand(1,7);
-                    @endphp
-                    <img src="{{asset('img/images/'.$rastgele.'.jpg')}}">
+                    <img src="{{asset('/uploads/urunler/'.$urun->detay->urun_resmi)}}">
                     <hr>
                     </div>
                 </div>
@@ -39,13 +36,14 @@
                     <li role="presentation"><a href="#t2" data-toggle="tab">Yorumlar</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="t1">{{$urun->aciklama}}</div>
+                    <div role="tabpanel" class="tab-pane active" id="t1">{!!$urun->aciklama  !!}</div>
                     <div role="tabpanel" class="tab-pane" id="t2">Bu ürün hakkında henüz hiç yorum yapılmadı.İlk yorum yapan SEN ol!</div>
                 </div>
             </div>
 
         </div>
     </div>
+
 
 
 @endsection

@@ -94,9 +94,6 @@ Route::group(['prefix'=>'yonetici', 'middleware' => 'yonetici','namespace'=>'Yon
     });
 
 
-
-
-
 });
 
 

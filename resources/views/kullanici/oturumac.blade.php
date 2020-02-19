@@ -53,7 +53,8 @@
                             </div>
                         </div>
                         <div style="padding-left: 250px;  " class="links">
-
+                            <a style="color:#f33535;" href="{{route('kullanici.kaydol')}}">Hâlâ kayıt olmadın mı ?</a>
+                            <br>
                             <a style="color:#f33535;" href="{{route('anasayfa')}}"><-Ana sayfaya geri dön.</a>
                         </div>
                         <div class="form-group">
