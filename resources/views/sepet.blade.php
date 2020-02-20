@@ -8,7 +8,7 @@
             <h2>Sepet</h2>
             @include('layouts.partials.alert')
             @if(count(Cart::content())>0)
-            <table class="table table-bordererd table-hover">
+            <table class="table table-bordererd table-hover" style="background-color: #ffffff">
                 <tr>
                     <th colspan="1">Ürün</th>
                     <th>Adet Fiyatı</th>
@@ -19,7 +19,7 @@
                 @foreach(Cart::content() as $urunCartItem)
 
                 <tr>
-                    <td style="width:20px; height:20px;"> <img src="{{asset('uploads/urunler/'.\App\Models\Urun::find($urunCartItem->id)->detay->urun_resmi)}}"> {{$urunCartItem->name}}
+                    <td style="width:20px; height:20px;"> <img style="width:200px; height:200px; "src="{{asset('uploads/urunler/'.\App\Models\Urun::find($urunCartItem->id)->detay->urun_resmi)}}"> {{$urunCartItem->name}}
                         <form action="{{route('sepet.kaldir',$urunCartItem->rowId)}}" method="post">
                             {{csrf_field()}}
                             {{method_field('DELETE')}}
@@ -28,7 +28,6 @@
                     <td>{{$urunCartItem->price}} ₺</td>
                     <td>
                         <a href="#" class="btn btn-xs btn-default urun-adet-azalt" data-id="{{$urunCartItem->rowId}}" data-adet="{{$urunCartItem->qty-1}}">-</a>
-
                         <span style="padding: 10px 20px">{{$urunCartItem->qty}}</span>
                         <a href="#" class="btn btn-xs btn-default urun-adet-artir" data-id="{{$urunCartItem->rowId}}" data-adet="{{$urunCartItem->qty+1}}">+</a>
                     </td>
@@ -64,7 +63,6 @@
                 <tr>
                     <th>Sepette Henüz bir ürün bulunmamaktadır.</th>
                     <hr>
-
                     <th><a href="{{route('anasayfa')}}">Anasayfaya git.<-</a></th>
                     <br>
                     <br>

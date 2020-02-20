@@ -85,6 +85,13 @@ Route::group(['prefix'=>'yonetici', 'middleware' => 'yonetici','namespace'=>'Yon
     });
 
 
+    Route::group(['prefix'=>'siparis'],function (){
+        Route::match(['get','post'],'/','SiparisController@index')->name('yonetici.siparis');
+        Route::get('/duzenle/{id}','SiparisController@form')->name('yonetici.siparis.duzenle');
+        Route::post('/kayit/{id?}','SiparisController@kayit')->name('yonetici.siparis.kayit');
+        Route::get('/sil/{id}','SiparisController@sil')->name('yonetici.siparis.sil');
+        Route::get('/yeni','SiparisController@form')->name('yonetici.siparis.yeni');
+    });
     Route::group(['prefix'=>'urun'],function (){
         Route::match(['get','post'],'/','UrunController@index')->name('yonetici.urun');
         Route::get('/duzenle/{id}','UrunController@form')->name('yonetici.urun.duzenle');
@@ -92,6 +99,11 @@ Route::group(['prefix'=>'yonetici', 'middleware' => 'yonetici','namespace'=>'Yon
         Route::get('/sil/{id}','UrunController@sil')->name('yonetici.urun.sil');
         Route::get('/yeni','UrunController@form')->name('yonetici.urun.yeni');
     });
+
+
+
+
+
 
 
 });
