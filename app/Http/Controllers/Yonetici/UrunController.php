@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Yonetici;
 
 use App\Models\Kategori;
+use App\Models\Siparis;
 use App\Models\Urun;
 use App\Models\UrunDetay;
 use Illuminate\Http\Request;
@@ -11,10 +12,20 @@ use App\Http\Controllers\Controller;
 class UrunController extends Controller
 {
     public function index(){
+        if(\request()->filled('aranan')){
 
-        $liste = Urun::orderByDesc('created_at')->get();
+            $aranan = \request('aranan');
+            $liste = Urun::where('urun_adi','like' ,"%$aranan%")
+                    ->orWhere('aciklama','like',"%$aranan%")
+                    ->paginate(8);
+            \request()->flash();
 
+        }
+        else{
+            $liste = Urun::orderByDesc('id')->paginate(8);
+        }
         return view('yonetici.urun.index',compact('liste'));
+
     }
 
     public function form($id = 0){

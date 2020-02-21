@@ -26,7 +26,7 @@
                         <input type="hidden" name="id" value="{{$urun->id}}">
                         <input type="submit" class="btn btn-theme" value="Sepete Ekle">
                     </form>
-                    <form action="{{route('sepet.ekle')}}" method="POST"></form>
+
                 </div>
             </div>
 

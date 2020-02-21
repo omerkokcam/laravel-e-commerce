@@ -7,16 +7,18 @@
     <hr>
     <h1 class="sub-header">
 
-        <form action="{{route('yonetici.siparis')}}" method="post" class="form-inline" >
+        <form class="navbar-form navbar-left" action="{{route('yonetici.urun')}}" method="post">
             {{csrf_field()}}
-            <div style="margin-left: 25%;margin-right:10%;" class="form-group">
-                <label  for="aranan">Ara:</label>
-                <input style="width:380px" type="text" class="form-control form-control-sm" name="aranan" id="aranan" placeholder="Sipariş Ara..." value="{{old('aranan')}}">
+            <div style="margin-left: -10px" class="input-group">
+                <input style="width: 380px" type="text"  name="aranan" id="navbar-search" class="form-control" placeholder="Sipariş Ara..." value="{{old('aranan')}}">
+                <span class="input-group-btn">
+                            <button  type="submit" class="btn btn-default">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
             </div>
-            <button style="margin-left: -140px" type="submit" class="btn btn-primary">Ara</button>
-            <a  href="{{route('yonetici.siparis')}}" class="btn btn-primary">Temizle</a>
-
         </form>
+        <br>
         <br>
         Sipariş Listesi
     </h1>
@@ -34,11 +36,11 @@
             </tr>
             </thead>
             <tbody>
-            @if(count($list) == 0)
+            @if(count($liste) == 0)
             <tr><td colspan="6" class="text-center">Kayıt bulunamadı!</td></tr>
 
             @endif
-            @foreach($list as $list)
+            @foreach($liste as $list)
             <tr>
                 <td>{{$list->id}}</td>
                 <td>{{$list->sepet->kullanici_id}}</td>
@@ -58,7 +60,7 @@
                 @endforeach
             </tbody>
         </table>
-        {{$list->links()}}
+        {{$liste->appends(['aranan'=>old('aranan')])->links()}}
     </div>
 
 

@@ -9,6 +9,19 @@
         <div class="btn-group pull-right" >
             <a href="{{route('yonetici.kullanici.yeni')}}" class="btn btn-primary">Yeni</a>
         </div>
+        <form class="navbar-form navbar-left" action="{{route('yonetici.urun')}}" method="post">
+            {{csrf_field()}}
+            <div style="margin-left: -10px" class="input-group">
+                <input style="width: 380px" type="text"  name="aranan" id="navbar-search" class="form-control" placeholder="Kullanıcı Ara..." value="{{old('aranan')}}">
+                <span class="input-group-btn">
+                            <button  type="submit" class="btn btn-default">
+                                <i class="fa fa-search"></i>
+                            </button>
+                </span>
+            </div>
+        </form>
+        <br>
+        <br>
         Kullanıcı Listesi
     </h1>
     @include('layouts.partials.alert')

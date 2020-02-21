@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Yonetici;
 
 use App\Kullanici;
 use App\Models\KullaniciDetay;
+use App\Models\Siparis;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -48,7 +49,18 @@ class KullaniciController extends Controller
         return redirect()->route('anasayfa');
     }
     public function index(){
-        $liste=Kullanici::orderBy('created_at','desc')->paginate(8);
+
+
+        if(\request()->filled('aranan')){
+            request()->flash();
+            $aranan = \request('aranan');
+            $liste = Kullanici::where('adsoyad','like','%$aranan%')->orderByDesc('id')->paginate(8)->appends('aranan',$aranan);
+
+        }
+        else{
+            $liste = Kullanici::orderByDesc('id')->paginate(8);
+        }
+
         return view('yonetici.kullanici.index',compact('liste'));
     }
     public function form($id = 0){

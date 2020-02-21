@@ -63,7 +63,7 @@
                 <tr>
                     <th>Sepette Henüz bir ürün bulunmamaktadır.</th>
                     <hr>
-                    <th><a href="{{route('anasayfa')}}">Anasayfaya git.<-</a></th>
+                    <th><a href="{{route('anasayfa')}}">Alışverişe başla...<-</a></th>
                     <br>
                     <br>
                 </tr>

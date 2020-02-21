@@ -26,6 +26,7 @@
 
                     <img style="padding-left:230px; width:600px ;height:150px ;padding-bottom:20px;" src="{{asset('img/logo.png')}}" >
                     @include('layouts.partials.errors')
+                    @include('layouts.partials.alert')
 
                     <form style=" margin-bottom: 200px" class="form-horizontal" role="form" method="POST" action="{{route('kullanici.oturumac')}}">
                         {{csrf_field()}}

@@ -7,7 +7,8 @@
     <div class="container">
         <div class="bg-content">
             <h2>Ödeme</h2>
-            <form action="{{route('odeme')}}">
+            <form action="{{route('odeme')}}"  method="post">
+                {{csrf_field()}}
             <div class="row">
                 <div class="col-md-5">
                     <h3>Ödeme Bilgileri</h3>
@@ -23,7 +24,7 @@
                                 <select name="son_kullanma_tarihi_ay" id="son_kullanma_tarihi_ay" class="form-control" required>
                                     @for($i=1;$i<=12;$i++)
                                     <option>{{$i}}</option>
-                                        @endfor
+                                    @endfor
                                 </select>
                             </div>
                             <div class="col-md-6">
@@ -31,10 +32,10 @@
                                 <select name="son_kullanma_tarihi_yil" id="son_kullanma_tarihi_yil" class="form-control" required>
                                     @for($j=date('Y');$j<=date('Y')+10;$j++)
                                     <option>{{$j}}</option>
-                                        @endfor
+                                    @endfor
                                     @if($i<date('M')&&$j<date('Y'))
                                         Kart bilgilerinizi doğru girin lütfen.
-                                        @endif
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -63,20 +64,38 @@
                 </div>
                 <div class="col-md-7">
                     <h4>Ödenecek Tutar</h4>
-                    <span class="price">18.92 <small>TL</small></span>
+                    <span class="price">{{Cart::total()}} <small>₺</small></span>
 
-                    <h4>Kargo</h4>
-                    <span class="price">0 <small>TL</small></span>
-
-                    <h4>Teslimat Bilgileri</h4>
-                    <p>Teslimat Adresi </p>
-                    <a href="#">Değiştir</a>
-
-                    <h4>Kargo</h4>
-                    <p>Ücretsiz
+                   <h4>İletişim ve Fatura Bilgileri</h4>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="adsoyad">Ad Soyad</label>
+                                <input type="text" class="form-control" name="adsoyad" id="adsoyad" value="{{auth()->user()->adsoyad}}" required>
+                            </div>
+                        </div>
+                        <div class="col-md-8"><div class="form-group">
+                                <label for="adres">Adres Bilgileri</label>
+                                <input type="text" class="form-control" name="adres" id="adres" value="{{$kullanici_detay->adres}}" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="telefon">Telefon</label>
+                                <input type="text" class="form-control telefon" name="telefon" id="telefon" value="{{$kullanici_detay->telefon}}" >
+                            </div>
+                        </div>
+                        <div class="col-md-8"><div class="form-group">
+                                <label for="ceptelefonu">Cep Telefonu</label>
+                                <input type="text" class="form-control ceptelefon" name="ceptelefonu" id="ceptelefonu" value="{{$kullanici_detay->ceptelefonu}}" required>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            </form>
+        </form>
 
         </div>
     </div>
@@ -88,6 +107,7 @@
         $('.kredikarti').mask('0000-0000-0000-0000', { placeholder: "____-____-____-____" });
         $('.kredikarti_cvv').mask('000', { placeholder: "___" });
         $('.telefon').mask('(000) 000-00-00', { placeholder: "(___) ___-__-__" });
+        $('.ceptelefon').mask('(500) 000-00-00', { placeholder: "(5__) ___-__-__" });
     </script>
 
 

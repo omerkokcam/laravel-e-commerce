@@ -33,11 +33,8 @@ Route::group(['middleware' => 'auth'],function(){
 
 });
 
-
-
 Route::get('/odeme','OdemeController@index')->name('odeme');
-
-
+Route::post('/odeme','OdemeController@odemeyap')->name('odemeyap');
 
 
 Route::post('/ara','UrunController@ara')->name('urun_ara');
@@ -61,7 +58,7 @@ Route::group(['prefix'=>'kullanici'],function (){
 Auth::routes();
 
 
-//-------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------------------------
 Route::group(['prefix'=>'yonetici', 'middleware' => 'yonetici','namespace'=>'Yonetici'],function () {
     Route::get('/', 'AnasayfaController@index')->name('yonetici.anasayfa');
     Route::get('/oturumukapat','KullaniciController@oturumukapat')->name('yonetici.oturumukapat');

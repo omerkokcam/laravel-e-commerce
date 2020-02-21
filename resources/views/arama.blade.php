@@ -16,10 +16,8 @@
             @foreach($urunler as $urun)
                 <div class="col-md-3 product">
                     <a href="{{route('urun',$urun->slug)}}">
-                        @php
-                        $rastgele=rand(1,7)
-                        @endphp
-                        <img src="{{asset('img/images/'.$rastgele.'.jpg')}}" alt="{{$urun->urun_adi}}">
+
+                        <img src="{{asset('/uploads/urunler/'.$urun->detay->urun_resmi)}}" alt="{{$urun->urun_adi}}">
                     </a>
                     <p>
                         <a href="{{route('urun',$urun->slug)}}">{{$urun->urun_adi}}</a>

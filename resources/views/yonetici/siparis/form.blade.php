@@ -19,6 +19,16 @@
 {{--            <input type="hidden" name="id" value="{{$entry->id}}">--}}
             <div class="col-md-6">
                 <div class="form-group">
+                    <label for="siparis_adi"> Ad Soyad </label>
+                    <input type="text" class="form-control" name="siparis_adi" id="siparis_adi" placeholder = "Sipariş Adını giriniz..." value="{{$entry->siparis_adi}}">
+                </div>
+            </div><div class="col-md-6">
+                <div class="form-group">
+                    <label for="siparis_adi"> Sipariş Adı </label>
+                    <input type="text" class="form-control" name="siparis_adi" id="siparis_adi" placeholder = "Sipariş Adını giriniz..." value="{{$entry->siparis_adi}}">
+                </div>
+            </div><div class="col-md-6">
+                <div class="form-group">
                     <label for="siparis_adi"> Sipariş Adı </label>
                     <input type="text" class="form-control" name="siparis_adi" id="siparis_adi" placeholder = "Sipariş Adını giriniz..." value="{{$entry->siparis_adi}}">
                 </div>

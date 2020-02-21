@@ -5,44 +5,32 @@
 @section('content')
     <div class="container">
         <div class="bg-content">
-            <h2>Sipariş (SP-00123)</h2>
+            <h2>Sipariş (SP-{{$siparis->id}})</h2>
             <table class="table table-bordererd table-hover">
                 <tr>
-                    <th>Ürün</th>
+                    <th colspan="2">Ürün</th>
                     <th>Tutar</th>
+                    <th></th>
                     <th>Adet</th>
-                    <th>Ara Toplam</th>
-                    <th>Durum</th>
+
                 </tr>
                 <tr>
-                    <td> <img src="http://lorempixel.com/120/100/food/2"> Ürün adı</td>
-                    <td>18.99</td>
-                    <td>1</td>
-                    <td>18.99</td>
-                    <td>
-                        Sipariş alındı, <br> Onaylandı, <br> Kargoya verildi, <br> Bir sorun var. İletişime geçin!
-                    </td>
+                  @foreach($siparis->sepet->sepet_urunler as $sepet_urun)
+                      <td style="width: 120px "><img style="width: 120px; height: 120px " src="{{asset('/uploads/urunler/'.$sepet_urun->urun->detay->urun_resmi)}}" ></td>
+                      <td>{{$sepet_urun->urun->urun_adi}}</td>
+                      <td>{{$sepet_urun->fiyati*$sepet_urun->adet}}</td>
+                      <td>{{$sepet_urun->adet}}</td>
+                      <td>{{$sepet_urun->durum}}</td>
+                  @endforeach
                 </tr>
                 <tr>
-                    <th></th>
-                    <th></th>
-                    <th>Toplam Tutar (KDV Dahil)</th>
-                    <th>18.99</th>
-                    <th></th>
-                </tr>
+
+                    <th colspan="4" class="text-right">Toplam Tutar(KDV Dahil) </th>
+                    <th colspan="2">{{$siparis->siparis_tutari}}₺</th>
+
                 <tr>
-                    <th></th>
-                    <th></th>
-                    <th>Kargo</th>
-                    <th>Ücretsiz</th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th>Sipariş Toplamı</th>
-                    <th>18.99</th>
-                    <th></th>
+                    <th colspan="4" class="text-right">Sipariş Durumu</th>
+                    <th colspan="2">{{$siparis->durum}}</th>
                 </tr>
 
             </table>

@@ -13,5 +13,8 @@ class SepetUrun extends Model
     protected $guarded = [];
     protected $fillable = ['sepet_id','urun_id','adet','tutar','durum'];
 
+    public function Urun(){
 
+        return $this->belongsTo('App\Models\Urun');
+    }
 }

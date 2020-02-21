@@ -41,6 +41,6 @@ class Kullanici extends Authenticatable
 
     public function kullanici_detay(){
 
-        return $this->hasOne('App\Models\KullaniciDetay');
+        return $this->hasOne('App\Models\KullaniciDetay')->withDefault();
     }
 }
