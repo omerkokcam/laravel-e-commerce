@@ -59,11 +59,7 @@ class KullaniciController extends Controller
                         ['sepet_id'=> $aktif_sepet_id, 'urun_id'=>$cartItem->id],
                         ['adet'=>$cartItem->qty, 'fiyati'=>$cartItem->price, 'durum'=>'Beklemede']);
                 }
-                Cart::destroy();
-                $sepetUrunler = SepetUrun::where('sepet_id',$aktif_sepet_id)->get();
-                foreach ($sepetUrunler as $sepetUrun){
-                    \Gloudemans\Shoppingcart\Facades\Cart::add($sepetUrun->urun()->id,$sepetUrun->urun()->urun_adi, $sepetUrun->adet, $sepetUrun->fiyati,['slug'=>$sepetUrun->urun()->slug]);
-                }
+               
             }
             return redirect()->intended('/');
         }
