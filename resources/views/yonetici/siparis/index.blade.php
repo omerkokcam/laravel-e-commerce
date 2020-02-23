@@ -7,7 +7,7 @@
     <hr>
     <h1 class="sub-header">
 
-        <form class="navbar-form navbar-left" action="{{route('yonetici.urun')}}" method="post">
+        <form class="navbar-form navbar-left" action="{{route('yonetici.siparis')}}" method="post">
             {{csrf_field()}}
             <div style="margin-left: -10px" class="input-group">
                 <input style="width: 380px" type="text"  name="aranan" id="navbar-search" class="form-control" placeholder="Sipariş Ara..." value="{{old('aranan')}}">

@@ -61,6 +61,7 @@
                             <img src="{{asset('/uploads/urunler/'.$urun_gunun_firsati->detay->urun_resmi)}}" class="img-responsive">
                             {{$urun_gunun_firsati->urun_adi}}
                         </a>
+                            <p class="price">{{$urun_gunun_firsati->fiyati}} ₺</p>
                     </div>
                 </div>
             </div>

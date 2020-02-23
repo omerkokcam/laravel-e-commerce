@@ -10,7 +10,6 @@
                 <tr>
                     <th colspan="2">Ürün</th>
                     <th>Tutar</th>
-                    <th></th>
                     <th>Adet</th>
 
                 </tr>
@@ -20,7 +19,7 @@
                       <td>{{$sepet_urun->urun->urun_adi}}</td>
                       <td>{{$sepet_urun->fiyati*$sepet_urun->adet}}</td>
                       <td>{{$sepet_urun->adet}}</td>
-                      <td>{{$sepet_urun->durum}}</td>
+
                   @endforeach
                 </tr>
                 <tr>

@@ -11,7 +11,7 @@ class Sepet extends Model
 {
     use SoftDeletes;
     protected $table='sepet';
-    protected $fillable = ['kullanici_id'];
+    protected $fillable = ['kullanici_id',];
     protected $guarded = [];
 
 //    public function Kullanici() {

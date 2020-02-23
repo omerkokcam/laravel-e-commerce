@@ -1,5 +1,5 @@
 <div class="list-group" >
-    <a href="#" class="list-group-item">
+    <a href="{{route('yonetici.anasayfa')}}" class="list-group-item">
         <span class="fa fa-fw fa-dashboard"></span> Giriş</a>
     <a href="{{route('yonetici.urun')}}" class="list-group-item">
         <span class="fa fa-fw fa-dashboard"></span> Ürünler

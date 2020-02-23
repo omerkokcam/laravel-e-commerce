@@ -9,7 +9,7 @@ class Siparis extends Model
 {
     use SoftDeletes;
     protected $table = 'siparis';
-    protected $fillable = ['sepet_id','siparis_tutari','banka','taksit_sayisi','durum'];
+    protected $fillable = ['sepet_id','siparis_tutari','banka','taksit_sayisi','durum','adsoyad','adres','telefon','ceptelefonu'];
     //guarded kullanırsak tablodaki tüm elemanları ekleyebileceğimizi anlatıyorduk $protected = guarded[];
 
     public function sepet(){

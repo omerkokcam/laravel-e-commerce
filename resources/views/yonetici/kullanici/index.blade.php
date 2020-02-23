@@ -77,6 +77,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{$liste->appends(['aranan'=>old('aranan')])->links()}}
     </div>
 
 

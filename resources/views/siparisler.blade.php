@@ -23,7 +23,7 @@
                     <td>{{$siparis->durum}}</td>
                     <td><a href="{{route('siparis',$siparis->id)}}" class="btn btn-sm btn-success">Detay</a></td>
                 </tr>
-                    @endforeach
+                 @endforeach
             </table>
             @endif
         </div>
