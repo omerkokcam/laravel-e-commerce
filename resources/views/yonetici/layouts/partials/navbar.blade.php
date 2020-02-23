@@ -21,9 +21,6 @@
                 <li>
                     <a href="{{route('yonetici.anasayfa')}}">Ana Sayfa</a>
                 </li>
-                <li>
-                    <a href="#">Ayarlar</a>
-                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">

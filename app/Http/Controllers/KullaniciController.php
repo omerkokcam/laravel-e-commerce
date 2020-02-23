@@ -59,7 +59,7 @@ class KullaniciController extends Controller
                         ['sepet_id'=> $aktif_sepet_id, 'urun_id'=>$cartItem->id],
                         ['adet'=>$cartItem->qty, 'fiyati'=>$cartItem->price, 'durum'=>'Beklemede']);
                 }
-               
+
             }
             return redirect()->intended('/');
         }

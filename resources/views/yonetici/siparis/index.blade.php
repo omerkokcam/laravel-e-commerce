@@ -45,7 +45,7 @@
                 <td>{{$list->id}}</td>
                 <td>{{$list->sepet->kullanici_id}}</td>
                 <td>SP-{{$list->id}}</td>
-                <td>{{$list->siparis_tutari *(100 + config('cart.tax'))/100}}₺</td>
+                <td>{{$list->siparis_tutari }}₺</td>
                 <td>{{$list->durum}}</td>
                <td>{{$list->created_at}}</td>
                 <td style="width: 100px">
