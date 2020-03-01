@@ -8,6 +8,7 @@ use App\Models\Urun;
 use App\Models\UrunDetay;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
 
 class UrunController extends Controller
 {
@@ -15,8 +16,8 @@ class UrunController extends Controller
         if(\request()->filled('aranan')){
 
             $aranan = \request('aranan');
-            $liste = Urun::where('urun_adi','like' ,"%$aranan%")
-                    ->orWhere('aciklama','like',"%$aranan%")
+            $liste = Urun::where('urun_adi','like' ,"%".$aranan."%")
+                    ->orWhere('aciklama','like',"%".$aranan."%")
                     ->paginate(8);
             \request()->flash();
 
@@ -26,6 +27,15 @@ class UrunController extends Controller
         }
         return view('yonetici.urun.index',compact('liste'));
 
+    }
+
+    public function ara(Request $request){
+        if (isset($request->aranan)){
+            $aranan = $request->aranan;
+            $sonuc = Urun::where('urun_adi',"like","%".$aranan."%")->limit(5)->get();
+            return $sonuc;
+        }
+        return null;
     }
 
     public function form($id = 0){

@@ -90,8 +90,10 @@ Route::group(['prefix'=>'yonetici', 'middleware' => 'yonetici','namespace'=>'Yon
         Route::get('/yeni','SiparisController@form')->name('yonetici.siparis.yeni');
     });
     Route::group(['prefix'=>'urun'],function (){
+        Route::get('ara','UrunController@ara')->name('yonetici.urun.ara');
         Route::match(['get','post'],'/','UrunController@index')->name('yonetici.urun');
         Route::get('/duzenle/{id}','UrunController@form')->name('yonetici.urun.duzenle');
+
         Route::post('/kayit/{id?}','UrunController@kayit')->name('yonetici.urun.kayit');
         Route::get('/sil/{id}','UrunController@sil')->name('yonetici.urun.sil');
         Route::get('/yeni','UrunController@form')->name('yonetici.urun.yeni');

@@ -2,16 +2,9 @@
 @section('title','eBuy | Ana Sayfa')
 @extends('layouts.master')
 @section('content')
-    @if(session()->has('mesaj')){
-        <div class='container'>
+ @include('layouts.partials.alert')
 
-            <div class="alert alert-{{session('mesaj_tur')}}">{{session('mesaj')}}</div>
 
-        </div>
-
-    }
-
-    @endif
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -122,4 +115,5 @@
             </div>
         </div>
     </div>
+
 @endsection

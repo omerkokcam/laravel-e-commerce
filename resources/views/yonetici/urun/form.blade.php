@@ -121,10 +121,7 @@
                         b();
                     })
                 }
-                $('.select2-selection__choice').mouseup(function(){
-                    $($(this).find('.select2-selection__choice__remove')[0]).click();
-                    b();
-                });
+                b();
             }
             tiklamaislemi();
         })
